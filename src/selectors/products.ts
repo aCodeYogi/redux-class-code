@@ -1,10 +1,22 @@
+import { createSelector } from "reselect";
 import { State } from "../store";
 
-export function productsLoadingSelector(state: State) {
-  return state.products.loading;
+export function productsStateSelector(state: State) {
+  return state.products;
 }
 
-export function productsSelector(state: State) {
-  const normalizedProducts = state.products.products;
-  return Object.keys(normalizedProducts).map((pid) => normalizedProducts[+pid]);
-}
+export const productsLoadingSelector = createSelector(
+  productsStateSelector,
+  (productState) => productState.loading
+);
+
+export const productsMapSelector = createSelector(
+  productsStateSelector,
+  (productState) => productState.products
+);
+
+export const productsSelector = createSelector(
+  productsMapSelector,
+  (normalizedProducts) =>
+    Object.keys(normalizedProducts).map((pid) => normalizedProducts[+pid])
+);

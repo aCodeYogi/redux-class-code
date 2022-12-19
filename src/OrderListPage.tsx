@@ -11,7 +11,10 @@ const OrderListPage: FC<OrderListPageProps> = (props) => {
   const dispatch = useDispatch();
 
   const ordersLoading = useSelector(ordersLoadingSelector);
+
   const orders = useSelector(ordersSelector);
+
+
 
   useEffect(() => {
     dispatch(loadOrdersAction());
